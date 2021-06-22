@@ -1,35 +1,28 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
-const Site = styled.div`
-  width: 400px;
-  height: 400px;
-  background-color: #00FF00;
-`;
-
-const Botao = styled.button`
-  font-size: 19px;
-  padding: 10px 15px;
-  border: 3px solid #FF0000;
-  color: #FF0000;
-  background-color: #FFF;
-  margin: 5px;
-  border-radius: 5px;
-`;
-
-const BotaoPequeno = styled(Botao)`
-  padding: 5px 10px;
-  font-size: 16px;
-  color: ${props => props.ativo ? '#CCC' : '#000'};
-`;
+const Input = styled.input`
+    width:400px;
+    height: 30px;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #000;
+  `;
 
 function App(){
 
+  const [contagem, setContagem] = useState(0);
+  
+  useEffect(() => {
+    document.title = `Contagem ${contagem}`
+  }
+  , [contagem]);
+
   return (
-    <Site>
-      <Botao>Clique aqui</Botao>
-      <BotaoPequeno ativo={true}>Clique aqui</BotaoPequeno>
-    </Site>
+    <>
+      <h1>Contagem: {contagem}</h1>
+      <button onClick={() => {setContagem(contagem+1)}} >Aumentar número</button>
+    </>
   );
 }
 
