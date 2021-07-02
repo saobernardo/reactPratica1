@@ -14,15 +14,16 @@ function App(){
       {id:3, title: 'Gravar aula', done:false}
     ]);
   }, []);
-
-  function handleSearchInput(novoTexto){
-    setSearchText(novoTexto);
+  function addAction(newItem){
+    let newList = [...list, {title: newItem, done: false}];
+    setList(newList);
   }
 
   return (
     <>
       <h1>Lista de Tarefas</h1>
-      <SearchBox frasePadrao="Faça sua busca..." onChangeText={handleSearchInput} />
+      <SearchBox frasePadrao="Adicione um item" 
+      onEnter={addAction} />
 
       <hr />
 
@@ -33,8 +34,6 @@ function App(){
         )}
       </ul>
     </>
-
-
   );
 }
 
