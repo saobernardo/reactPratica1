@@ -2,7 +2,16 @@ import React from 'react';
 import {BrowserRouter, Switch, Route, Link, Redirect} from 'react-router-dom';
 import Home from './pages/Home';
 import Sobre from './pages/Sobre';
-import Categoria from './pages/Categoria';
+import Login from './pages/Login';
+
+const isLogged = true;
+const PrivateRoute = ({children, ...rest}) => {
+  return(
+    <Route {...rest}>
+      {isLogged ? children : <Redirect to="/login" /> }
+    </Route>
+  );
+};
 
 function App(){
 
@@ -14,10 +23,6 @@ function App(){
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/sobre">Sobre</Link></li>
-            <li><Link to="/quem-somos">Quem Somos</Link></li>
-            <li><Link to="/categoria?tipo=fps&subtipo=doom">FPS</Link></li>
-            <li><Link to="/categoria?tipo=hackslash">Hack 'n Slash</Link></li>
-            <li><Link to="/categoria?tipo=rpg">RPG</Link></li>
           </ul>
         </nav>
       </header>
@@ -29,17 +34,13 @@ function App(){
           <Home />
         </Route>
 
-        <Route path="/sobre">
+        <Route exact path="/login">
+          <Login />
+        </Route>
+
+        <PrivateRoute path="/sobre">
           <Sobre />
-        </Route>
-
-        <Route path="/quem-somos">
-          <Redirect to="/sobre"></Redirect>
-        </Route>
-
-        <Route path="/categoria">
-          <Categoria />
-        </Route>
+        </PrivateRoute>
 
         <Route path="*">
           <h4>Página não encontrada</h4>
