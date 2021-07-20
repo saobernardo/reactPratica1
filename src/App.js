@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Sobre from './pages/Sobre';
 import Login from './pages/Login';
 
-const isLogged = true;
+const isLogged = false;
 const PrivateRoute = ({children, ...rest}) => {
   return(
     <Route {...rest}>
